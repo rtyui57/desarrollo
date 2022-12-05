@@ -34,18 +34,24 @@ def quantize(img, clusters):
 paths = ['media/players/arg1.jpg', 'media/players/arg2.jpg', 'media/players/arg3.jpg', 'media/players/arg4.jpg', 'media/players/arg5.jpg',
         'media/players/hol1.jpg', 'media/players/hol2.jpg', 'media/players/hol3.jpg', 'media/players/hol4.jpg', 'media/players/hol5.jpg']
 clusters = 2
+path = 'media/players/{}.jpg'
 dest = "media\\players\\quantized1.jpg"
 
 colors = []
 r = []
 g = []
 b = []
-for i in range(0, 10):
-    image = cv2.imread(paths[i])
+for i in range(0, 13):
+    if i == 2 or i == 3:
+        continue
+    image = cv2.imread(path.format(i))
     image = remove_background(image)
     image = image[int(image.shape[0]*0.05):int(image.shape[0]*0.6), :]
     quantized, dom_color = quantize(image, clusters=clusters)
     colors.append(dom_color)
+    plt.figure("Numeo jugaor {}".format(i))
+    plt.imshow(quantized)
+    plt.show()
     r.append(dom_color[0])
     g.append(dom_color[1])
     b.append(dom_color[2])
