@@ -50,3 +50,4 @@ M = get_matrix(kp_model, image)
 template_2d = show_template(yolo, template, M)
 plt.imshow(template_2d)
 plt.show()
+cv2.COLOR_RGB2

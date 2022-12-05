@@ -1,15 +1,18 @@
 import cv2
 
-def get_players(results):
+def get_players(results, image):
     coord = results.xyxy[0]
     detecciones = coord.size(dim=0)
     puntos = []
+    players = []
     for obj in range(0, detecciones):
         x1 = int(coord[obj][0].item())
+        y1 = int(coord[obj][1].item())
         x2 = int(coord[obj][2].item()) 
         y2 = int(coord[obj][3].item())
         puntos.append([int(((x1 + x2)/2)), y2])
-    return puntos
+        players.append(image[y1:y2, x1:x2])
+    return puntos, players
 
 def sum(x, y, array):
     return x*array[0] + y*array[1] + array[2]
