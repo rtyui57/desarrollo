@@ -21,6 +21,9 @@ def get_players(results, image):
         puntos.append([int(((x1 + x2)/2)), y2])
         player = image[y1:y2, x1:x2]
         players.append(player)
+        writen = cv2.imwrite("media\\players\\{}.jpg".format(obj), player)
+        if not writen:
+            print("Not writen")
     classify(players, puntos)
     return puntos, players
 
