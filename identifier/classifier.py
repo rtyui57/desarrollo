@@ -44,9 +44,13 @@ def classify(players, puntos):
         jug = remove_background(jug)
         jug = jug[int(jug.shape[0]*0.05):int(jug.shape[0]*0.6), :]
         quantized, dom_color = quantize(jug, clusters=2)
+        plt.imshow(quantized)
+        plt.show()
         colors.append(dom_color)
     clf = DBSCAN(eps=30, min_samples=0)
     labels = clf.fit_predict(colors)
     for i in range(0, len(labels)):
         clase = labels[i]
+        if clase > 4:
+            clase = 0
         puntos[i].append(COLORS[clase])
