@@ -1,0 +1,3 @@
+Using more efficient way to classify players usign dbscan without k-means. Use not labeld classification based on color
+Create track9ing system
+Make video
