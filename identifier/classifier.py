@@ -11,6 +11,16 @@ COLORS =  {
     4 : (12, 96, 117)
 }
 
+Detected = {
+    0 : None,
+    1 : None,
+    2 : None,
+    3 : None,
+    4 : None,
+    5 : None,
+    6 : None
+}
+
 def remove_background(imagen):
     hsv = cv2.cvtColor(np.copy(imagen), cv2.COLOR_BGR2HSV)
     mask = cv2.inRange(hsv, (36, 25, 25), (86, 255,255))
@@ -44,8 +54,6 @@ def classify(players, puntos):
         jug = remove_background(jug)
         jug = jug[int(jug.shape[0]*0.05):int(jug.shape[0]*0.6), :]
         quantized, dom_color = quantize(jug, clusters=2)
-        plt.imshow(quantized)
-        plt.show()
         colors.append(dom_color)
     clf = DBSCAN(eps=30, min_samples=0)
     labels = clf.fit_predict(colors)
@@ -53,4 +61,6 @@ def classify(players, puntos):
         clase = labels[i]
         if clase > 4:
             clase = 0
-        puntos[i].append(COLORS[clase])
+        #puntos[i].append(COLORS[clase])
+        color = (int(colors[i][0]), int(colors[i][1]), int(colors[i][2]))
+        puntos[i].append(color)

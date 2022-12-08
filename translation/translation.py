@@ -32,6 +32,7 @@ def pintar_puntos(img, puntos):
         x = int(punto[0])
         y = int(punto[1])
         color = punto[2]
+        print(color)
         img = cv2.circle(img, (x, y), 3, color, -1)
     return img
 
